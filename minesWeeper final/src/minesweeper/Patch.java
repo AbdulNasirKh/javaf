@@ -24,7 +24,8 @@ public class Patch {
     Scanner s = new Scanner(System.in);
     private int sizeOfBord;
     int numberOfMines;
-    
+    int numberOfShield;
+
     
     class pair {
 
@@ -65,8 +66,11 @@ public class Patch {
             System.out.println("Please enter the size of the bord :");
             sizeOfBord = s.nextInt();
             double size1 = (double)(sizeOfBord * sizeOfBord);
-            size1*=(0.4);            
-            this.numberOfMines = (int)(size1);
+                        
+            this.numberOfMines =(int)(size1*(0.4));
+            this.numberOfShield = (int)(size1*(0.1));
+            
+            
             }while(sizeOfBord<3);
             
         } catch (InputMismatchException e) {
@@ -85,6 +89,7 @@ public class Patch {
 
         }
         minesGeneretor();
+        shieldGeneretor();
     }
     
     public int getBoardSize ()
@@ -107,7 +112,6 @@ public class Patch {
             if (!l.contains(p)) {
                 l.add(p);
                 i++;
-
             }
 
         } while (i != numberOfMines);
@@ -119,8 +123,40 @@ public class Patch {
 
             this.grid[key][value].containAMine = true;
         }
-
     }
+    
+    
+    void shieldGeneretor() {
+
+        List<pair> l = new LinkedList<>();
+
+        int i = 0;
+
+        do {
+
+            Random rand = new Random();
+            int x = rand.nextInt(this.sizeOfBord);
+            int y = rand.nextInt(this.sizeOfBord);
+            pair p = new pair(x, y);
+            if (!l.contains(p) && !this.grid[x][y].getIsMIne()) {
+                l.add(p);
+                i++;
+            }
+
+        } while (i != numberOfShield);
+
+        for (Iterator<pair> iterator = l.iterator(); iterator.hasNext();) {
+            pair next = iterator.next();
+            int key = next.x;
+            int value = next.y;
+            System.out.println(next);
+            this.grid[key][value].setIsAShield(true);
+        }
+    }
+    
+    
+    
+    
 
     public void setNumberOfMines(int numMine) {
         this.numberOfMines = numMine;
@@ -227,7 +263,6 @@ public class Patch {
         if(n==0){ 
             
              tempScore++;     
-             //System.out.println(this.tempScore);
              this.grid[x][y].setPrint(',');
              
              for (pair pa : checkNeighborsOfCell(x,y))
@@ -289,7 +324,9 @@ public class Patch {
 
                 if (grid[i][j].containAMine) {
                     str += 'x';
-                } else {
+                } else if(grid[i][j].containAShield)
+                     str+= 's'; 
+                else {
                     str += grid[i][j].getPrint();
                 }
 

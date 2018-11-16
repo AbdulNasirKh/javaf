@@ -21,10 +21,13 @@ public class score {
     private int containNumber;
     private int endGame;
     private int Continue;
+    private int NumberOfshields;
     private Scanner read;
     public score()
     {
+        
         this.totalScore = 0 ;
+        this.NumberOfshields = 0;
         this.containNumber = 0;
         this.clickOnEmptyCell = 10;
         this.flood = 1;
@@ -32,15 +35,14 @@ public class score {
         this.putSignOnEmpty = -1;
         this.pressOnMine = -250;
         this.endGame = 100;
-        this.Continue = -250;
+        this.Continue = 250;
         this.read = new Scanner(System.in);
         
     }
     
    public void edit()
    {    
-//       score s = new score();
-//       System.out.println(s);
+
        System.out.println("choose the one that you would like to change");
        System.out.println("1: Click on empty cell");
        System.out.println("2: Flood");
@@ -49,6 +51,7 @@ public class score {
        System.out.println("5: Press on mine");
        System.out.println("6: press on a cell that contains number");
        System.out.println("7: Ending the game");
+       System.out.println("8: number of shields");
        int choose =  read.nextInt();
        
        switch(choose)
@@ -102,6 +105,13 @@ public class score {
                this.endGame = N;
                break;
            }
+            case 8:
+            {
+                System.out.println("Enter the value the you want");
+               int N = read.nextInt();
+               this.NumberOfshields = N;
+               break;
+            }
        }
    }
     public int getTotalScore()
@@ -139,10 +149,12 @@ public class score {
     {
         this.totalScore+=this.flood*numberOfCells;
     }
+ 
     
     
     public void endGame()
     {
+        this.totalScore+=this.NumberOfshields*50;
         this.totalScore+=this.endGame;
     }
     
@@ -150,6 +162,28 @@ public class score {
     {
         this.totalScore-=this.Continue;
     }
+    
+    
+    public void setNumberOfShields(int value)
+    {
+        this.NumberOfshields = value;
+    }
+    
+    public void addOneToShield()
+    {
+        this.NumberOfshields++;
+    }
+    
+    public void subOneFromShield()
+    {
+        this.NumberOfshields--;
+    }
+    
+    public int getNumberOfShields()
+    {
+        return this.NumberOfshields;
+    }
+    
     
   public String toString() {
      
@@ -163,7 +197,8 @@ public class score {
        s+="4: Put a sign on empty cell: " + this.putSignOnEmpty +"\n";
        s+="5: Press on mine:  " + this.pressOnMine +"\n";
        s+="6: press on a cell that contains number:  " + this.containNumber +"\n";
-       s+="7:  Ending the game: " + this.endGame +"\n";
+       s+="7: Ending the game: " + this.endGame +"\n";
+       s+="8: number of shields" + this.NumberOfshields;
        
        return s;
   }  

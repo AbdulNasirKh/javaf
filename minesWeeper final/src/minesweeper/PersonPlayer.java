@@ -44,15 +44,31 @@ public class PersonPlayer extends player{
                         System.out.println("x and y must be grater or equal to zero and less than " + b.getBoardSize() +"\n");
                     }
                     }while(!b.checkCelles(x, y));
-                    if (b.grid[x][y].getPrint() == 'p') {
+                    System.out.println(b.grid[x][y].getPrint());
+
+                     if (b.grid[x][y].getPrint() == 'p') {
                         System.out.println("pleas try again ");
                     }else
                     if (b.grid[x][y].containAMine) {
                         b.grid[x][y].print = 'B';
                         System.out.println(b);
+                        if(this.Score.getNumberOfShields() >0)
+                        {
+                            this.Score.subOneFromShield();
+                        } else
+                            if(this.Score.getTotalScore()>=250)
+                            {
+                               this.Score.Continue();
+                            }
+                            else 
                         return  false;
                         
                     } else if (!b.grid[x][y].containAMine && b.grid[x][y].getPrint() != 'p' && b.grid[x][y].getPrint()=='o') {
+                        if(b.grid[x][y].containAShield)
+                        {
+                            this.Score.addOneToShield();
+                        }
+                        
                         int num = b.numberOfMinesArroundTheCell(x, y);
                         if(num != 0)
                         {

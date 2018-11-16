@@ -77,6 +77,7 @@ public class MinesWeeper {
             case 1:
                 player p  = new PersonPlayer();
                 do{
+                    System.out.println("shield" + p.Score.getNumberOfShields());
                     if(p.Score.getTotalScore()<=10)
                     {
                         System.out.println("\nworring: your score is low..\n" + p.Score.getTotalScore());
@@ -88,6 +89,7 @@ public class MinesWeeper {
                         System.out.println("game over..");
                         break;
                     } else if(TheWinner()){
+                        p.Score.endGame();
                         System.out.println("Your score is: " + p.Score.getTotalScore());
                         System.out.println("Congrats!!..");
                         break ;
@@ -104,6 +106,9 @@ public class MinesWeeper {
                 p2 = new PersonPlayer();
                 int i=1;
                 do {   
+                System.out.println("shield" + p1.Score.getNumberOfShields());
+                System.out.println(p2.Score.getNumberOfShields());
+
                 if(p1.Score.getTotalScore()<=10)
                     {
                         System.out.println("\nworring: player 1 score is low..\n" + p1.Score.getTotalScore());
@@ -118,7 +123,7 @@ public class MinesWeeper {
                     {
                         System.out.println("First player's turn:");
                         if(!p1.play(bord,ScorePlayer1)){
-                            
+                            p2.Score.endGame();
                             System.out.println("player 2 wins ......");
                             break;
                         }
@@ -128,7 +133,7 @@ public class MinesWeeper {
                     {
                         System.out.println("Second player's turn::");
                         if(!p2.play(bord,ScorePlayer2)){
-                            
+                            p1.Score.endGame();
                             System.out.println("player 1 wins ......");
                             break;
                             
@@ -175,7 +180,7 @@ public class MinesWeeper {
                     {
                         System.out.println("Computer turn :");
                         if(!computer.play(bord,scoreComputer)){
-                            
+                            Player.Score.endGame();
                             System.out.println("\nworring: player 1 score is low..\n" + Player.Score.getTotalScore());
                             System.out.println("worring:Computer score is low.." + computer.Score.getTotalScore());
                             System.out.println("Player wins ......");
