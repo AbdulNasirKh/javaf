@@ -1,8 +1,8 @@
 package minesweeper;
 
 import java.util.Scanner;
-
-public class MinesWeeper {
+import java.*;
+public class MinesWeeper{
 
     private Patch bord;
     Scanner s;
@@ -63,7 +63,6 @@ public class MinesWeeper {
         return false;
         
     }
-
     void PlayChoices() {
         
         System.out.println("Single player press 1.. ");
@@ -77,7 +76,7 @@ public class MinesWeeper {
             case 1:
                 player p  = new PersonPlayer();
                 do{
-                    System.out.println("shield" + p.Score.getNumberOfShields());
+                    
                     if(p.Score.getTotalScore()<=10)
                     {
                         System.out.println("\nworring: your score is low..\n" + p.Score.getTotalScore());
@@ -94,7 +93,7 @@ public class MinesWeeper {
                         System.out.println("Congrats!!..");
                         break ;
                     }
-
+                    System.out.println("shield" + p.Score.getNumberOfShields());
                     System.out.println(bord);
                 }while(!TheWinner());
                 break;
@@ -121,6 +120,7 @@ public class MinesWeeper {
                     System.out.println(bord);
                     if(i%2!=0)
                     {
+                        
                         System.out.println("First player's turn:");
                         if(!p1.play(bord,ScorePlayer1)){
                             p2.Score.endGame();
@@ -155,6 +155,8 @@ public class MinesWeeper {
                 score scoreComputer= new score();
                 int j=1;
                 do {
+                
+                System.out.println("number of the shield for the  player" + Player.Score.getNumberOfShields());
                 if(Player.Score.getTotalScore()<=10)
                     {
                         System.out.println("\nworring: player 1 score is low..\n" + Player.Score.getTotalScore());
