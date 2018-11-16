@@ -106,8 +106,8 @@ public class MinesWeeper {
                 p2 = new PersonPlayer();
                 int i=1;
                 do {   
-                System.out.println("shield" + p1.Score.getNumberOfShields());
-                System.out.println(p2.Score.getNumberOfShields());
+                System.out.println("number of the shield for the first player" + p1.Score.getNumberOfShields());
+                System.out.println("number of the shield for the second player" + p2.Score.getNumberOfShields());
 
                 if(p1.Score.getTotalScore()<=10)
                     {
